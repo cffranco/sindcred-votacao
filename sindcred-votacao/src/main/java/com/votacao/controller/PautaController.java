@@ -46,5 +46,12 @@ public class PautaController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping(value = "resultado/{id}",
+	produces = MediaType.APPLICATION_JSON_VALUE)
+	public Pauta contarVoto(@PathVariable(value = "id") Integer id) {
+		return service.contarVoto(id);
+	}
+	
 
 }

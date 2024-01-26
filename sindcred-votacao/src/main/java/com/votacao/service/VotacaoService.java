@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.votacao.entity.Pauta;
 import com.votacao.entity.Votacao;
 import com.votacao.exceptions.ResourceNotFoundException;
 import com.votacao.repository.VotacaoRepository;
@@ -40,19 +39,6 @@ public class VotacaoService {
 				
 	}
 	
-	public Votacao contarVoto(Integer id) {
-		
-		Votacao votacao = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
-		
-		Integer votoSim = repository.contarVoto(id, "Sim");
-		Integer votoNao = repository.contarVoto(id, "Nao");
-		
-		votacao.setQtdNao(votoSim);
-		votacao.setQtdSim(votoNao);
-		
-		return votacao;
-		
-	}
 	
 	private boolean verificarCpf(String cpf) {
 		
@@ -65,5 +51,9 @@ public class VotacaoService {
 	public List<Votacao> findAll() {
 		logger.info("Listar todas as votos");
 		return repository.findAll();
+	}
+	
+	public Integer contarVoto(Integer id, String voto) {
+		return repository.contarVoto(id,voto);
 	}
 }

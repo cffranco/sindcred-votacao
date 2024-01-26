@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "pauta")
@@ -21,8 +22,14 @@ public class Pauta{
 	@Column(name = "descricao_pauta", nullable = false, length = 255)
 	private String pauta;
 	
-	@Column(name = "numero_voto")
+	@Transient
 	private Integer numeroVotos;
+	
+	@Transient
+	private Integer qtdSim;
+
+	@Transient
+	private Integer qtdNao;
 	
 	public Pauta() {
 		
@@ -52,9 +59,25 @@ public class Pauta{
 		this.numeroVotos = numeroVotos;
 	}
 
+	public Integer getQtdSim() {
+		return qtdSim;
+	}
+
+	public void setQtdSim(Integer qtdSim) {
+		this.qtdSim = qtdSim;
+	}
+
+	public Integer getQtdNao() {
+		return qtdNao;
+	}
+
+	public void setQtdNao(Integer qtdNao) {
+		this.qtdNao = qtdNao;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, numeroVotos, pauta);
+		return Objects.hash(id, numeroVotos, pauta, qtdNao, qtdSim);
 	}
 
 	@Override
@@ -67,9 +90,11 @@ public class Pauta{
 			return false;
 		Pauta other = (Pauta) obj;
 		return Objects.equals(id, other.id) && Objects.equals(numeroVotos, other.numeroVotos)
-				&& Objects.equals(pauta, other.pauta);
+				&& Objects.equals(pauta, other.pauta) && Objects.equals(qtdNao, other.qtdNao)
+				&& Objects.equals(qtdSim, other.qtdSim);
 	}
 
+	
 	
 	
 

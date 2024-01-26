@@ -11,5 +11,8 @@ public interface PautaRepository extends JpaRepository<Pauta, Integer> {
 	
 	@Query("Select p from Pauta p where upper(p.pauta) = upper(:texto)")
 	Pauta buscarTextoPauta(String texto);
+	
+	@Query("Select count(v.voto) from Votacao v where v.id = :id and upper(v.voto)  = upper(:voto)")
+	Integer contarVoto(Integer id);
 
 }

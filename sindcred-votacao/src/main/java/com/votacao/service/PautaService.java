@@ -19,6 +19,9 @@ public class PautaService {
 	@Autowired
 	PautaRepository repository;
 	
+	@Autowired
+	VotacaoService votacaoService;
+	
 	public Pauta create(Pauta pauta) {
 		
 		var entity = repository.buscarTextoPauta(pauta.getPauta());
@@ -48,6 +51,21 @@ public class PautaService {
 		//Verificar se tem algum voto
 		
 		repository.delete(entity);
+	}
+	
+	public Pauta contarVoto(Integer id) {
+		
+		Pauta pauta = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
+		
+		Integer votoSim = votacaoService.contarVoto(id, "Sim");
+		Integer votoNao = votacaoService.contarVoto(id, "Nao");
+		
+		pauta.setQtdNao(votoSim);
+		pauta.setQtdSim(votoNao);
+		pauta.setNumeroVotos(votoSim+votoNao);
+		
+		return pauta;
+		
 	}
 
 }
