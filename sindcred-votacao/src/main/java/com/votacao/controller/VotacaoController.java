@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.votacao.entity.Pauta;
 import com.votacao.entity.Votacao;
+import com.votacao.service.PautaService;
 import com.votacao.service.VotacaoService;
 
 @RestController
@@ -19,11 +21,15 @@ public class VotacaoController {
 	
 	@Autowired
 	private VotacaoService service;
+	
+	@Autowired
+	private PautaService pautaService;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Votacao computarVoto(@RequestBody Votacao voto) {
-		return service.computarVoto(voto);
+		Pauta pauta = pautaService.findById(voto.getId().getId());
+		return service.computarVoto(voto, pauta);
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

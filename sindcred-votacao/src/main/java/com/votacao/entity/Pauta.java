@@ -1,6 +1,8 @@
 package com.votacao.entity;
 
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -9,18 +11,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "pauta")
-public class Pauta{
+public class Pauta implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "descricao_pauta", nullable = false, length = 255)
 	private String pauta;
+	
+	@Column(name = "data_votacao", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataVotacao;
 	
 	@Transient
 	private Integer numeroVotos;
@@ -51,6 +61,14 @@ public class Pauta{
 		this.pauta = pauta;
 	}
 
+	public Date getDataVotacao() {
+		return dataVotacao;
+	}
+
+	public void setDataVotacao(Date dataVotacao) {
+		this.dataVotacao = dataVotacao;
+	}
+
 	public Integer getNumeroVotos() {
 		return numeroVotos;
 	}
@@ -77,7 +95,7 @@ public class Pauta{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, numeroVotos, pauta, qtdNao, qtdSim);
+		return Objects.hash(dataVotacao, id, numeroVotos, pauta, qtdNao, qtdSim);
 	}
 
 	@Override
@@ -89,11 +107,12 @@ public class Pauta{
 		if (getClass() != obj.getClass())
 			return false;
 		Pauta other = (Pauta) obj;
-		return Objects.equals(id, other.id) && Objects.equals(numeroVotos, other.numeroVotos)
-				&& Objects.equals(pauta, other.pauta) && Objects.equals(qtdNao, other.qtdNao)
-				&& Objects.equals(qtdSim, other.qtdSim);
+		return Objects.equals(dataVotacao, other.dataVotacao) && Objects.equals(id, other.id)
+				&& Objects.equals(numeroVotos, other.numeroVotos) && Objects.equals(pauta, other.pauta)
+				&& Objects.equals(qtdNao, other.qtdNao) && Objects.equals(qtdSim, other.qtdSim);
 	}
 
+	
 	
 	
 	

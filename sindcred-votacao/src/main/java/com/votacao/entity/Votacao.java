@@ -1,5 +1,6 @@
 package com.votacao.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -9,8 +10,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "votacao")
-public class Votacao {
+public class Votacao implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@EmbeddedId
     private VotacaoId id;
 	
