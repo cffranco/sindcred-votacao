@@ -1,7 +1,5 @@
 package com.votacao.service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 
@@ -69,8 +67,8 @@ public class PautaService {
 		Integer votoSim = votacaoService.contarVoto(id, "Sim");
 		Integer votoNao = votacaoService.contarVoto(id, "Nao");
 		
-		pauta.setQtdNao(votoSim);
-		pauta.setQtdSim(votoNao);
+		pauta.setQtdNao(votoNao);
+		pauta.setQtdSim(votoSim);
 		pauta.setNumeroVotos(votoSim+votoNao);
 		
 		return pauta;
