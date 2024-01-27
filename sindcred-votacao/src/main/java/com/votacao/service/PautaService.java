@@ -1,5 +1,8 @@
 package com.votacao.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,6 +32,12 @@ public class PautaService {
 		if(entity!=null) {
 			throw new ResourceNotFoundException("Essa pauta já foi cadastrada");
 		}
+		
+		Calendar agora = Calendar.getInstance();
+		agora.setTime(pauta.getDataVotacao());
+		agora.add(Calendar.MINUTE, 180);
+		
+		pauta.setDataVotacao(agora.getTime());
 		
 		logger.info("Cadastrando Pauta");
 		return repository.save(pauta);
