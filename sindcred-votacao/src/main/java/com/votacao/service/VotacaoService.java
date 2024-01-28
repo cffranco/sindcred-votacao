@@ -28,6 +28,10 @@ public class VotacaoService {
 	public Votacao computarVoto(Votacao voto, Pauta pauta) {
 		logger.info("Cadastrando Pauta");
 		
+		if(!voto.getVoto().equals("Sim") && !voto.getVoto().equals("Nao")) {
+			throw new ResourceNotFoundException("Voto inválido digite (Sim ou Nao)");
+		}
+		
 		HashMap<String, String> params = new HashMap<>();
 		params.put("cpf",voto.getId().getCpf());
 		
