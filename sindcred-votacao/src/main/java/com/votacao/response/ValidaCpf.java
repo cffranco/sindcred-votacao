@@ -9,6 +9,15 @@ public class ValidaCpf implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String cpfValido;
 	
+	
+	
+	public ValidaCpf() {
+	}
+	
+	public ValidaCpf(String cpfValido) {
+		this.cpfValido = cpfValido;
+	}
+	
 	public String getCpfValido() {
 		return cpfValido;
 	}

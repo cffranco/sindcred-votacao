@@ -23,6 +23,15 @@ public class Votacao implements Serializable{
 	public Votacao() {
 		
 	}
+	
+	
+
+	public Votacao(VotacaoId id, String voto) {
+		this.id = id;
+		this.voto = voto;
+	}
+
+
 
 	public VotacaoId getId() {
 		return id;

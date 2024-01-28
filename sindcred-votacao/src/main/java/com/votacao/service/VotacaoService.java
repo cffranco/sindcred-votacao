@@ -39,7 +39,7 @@ public class VotacaoService {
 		}
 		
 		//*Verificar se Votação aberta
-		String msg = verificarVotaca(pauta);
+		String msg = verificarVotacao(pauta);
 		if(msg.equals("Encerrada")) {
 			throw new ResourceNotFoundException("Votação encerrada.");
 		}else if (msg.equals("NaoIniciada")) {
@@ -58,7 +58,7 @@ public class VotacaoService {
 				
 	}
 	
-	private String verificarVotaca(Pauta pauta) {
+	String verificarVotacao(Pauta pauta) {
 		Calendar agora = Calendar.getInstance();
 		
 		//verificar se votação esta fechada

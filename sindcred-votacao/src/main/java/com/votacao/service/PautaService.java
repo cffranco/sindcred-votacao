@@ -23,8 +23,7 @@ public class PautaService {
 	@Autowired
 	VotacaoService votacaoService;
 	
-	public Pauta create(Pauta pauta) {
-		
+	public Pauta create(Pauta pauta) {		
 		var entity = repository.buscarTextoPauta(pauta.getPauta());
 	
 		if(entity!=null) {
@@ -43,8 +42,7 @@ public class PautaService {
 	}
 	
 	public Pauta  findById(Integer id) {
-		logger.info("Procurando pauta por id");
-			
+		logger.info("Procurando pauta por id");			
 		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
 	}
 	
@@ -56,14 +54,13 @@ public class PautaService {
 	public void delete(Integer id) {
 		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
 		//Verificar se tem algum voto
-		
+		logger.info("Excluindo pauta por id");
 		repository.delete(entity);
 	}
 	
-	public Pauta contarVoto(Integer id) {
-		
+	public Pauta contarVoto(Integer id) {		
 		Pauta pauta = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
-		
+		logger.info("Fazendo a contagem de votos");
 		Integer votoSim = votacaoService.contarVoto(id, "Sim");
 		Integer votoNao = votacaoService.contarVoto(id, "Nao");
 		
@@ -71,8 +68,7 @@ public class PautaService {
 		pauta.setQtdSim(votoSim);
 		pauta.setNumeroVotos(votoSim+votoNao);
 		
-		return pauta;
-		
+		return pauta;		
 	}
 
 }

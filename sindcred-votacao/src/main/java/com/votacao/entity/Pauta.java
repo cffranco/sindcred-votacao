@@ -45,6 +45,17 @@ public class Pauta implements Serializable{
 		
 	}
 
+	public Pauta(Integer id, String pauta, Date dataVotacao, Integer numeroVotos, Integer qtdSim, Integer qtdNao) {
+		this.id = id;
+		this.pauta = pauta;
+		this.dataVotacao = dataVotacao;
+		this.numeroVotos = numeroVotos;
+		this.qtdSim = qtdSim;
+		this.qtdNao = qtdNao;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
