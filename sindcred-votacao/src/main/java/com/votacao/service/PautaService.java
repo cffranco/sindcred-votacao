@@ -54,8 +54,14 @@ public class PautaService {
 	public void delete(Integer id) {
 		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado"));
 		//Verificar se tem algum voto
-		logger.info("Excluindo pauta por id");
-		repository.delete(entity);
+		var votos = votacaoService.procuraVoto(id);
+		if(votos>0) {
+			throw new ResourceNotFoundException("Essa pauta não pode ser apagada pois já possui votos");
+		}else {
+			logger.info("Excluindo pauta por id");
+			repository.delete(entity);	
+		}
+		
 	}
 	
 	public Pauta contarVoto(Integer id) {		

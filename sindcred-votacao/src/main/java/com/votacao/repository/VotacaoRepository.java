@@ -16,4 +16,6 @@ public interface VotacaoRepository extends JpaRepository<Votacao, VotacaoId> {
 	@Query("Select count(v.voto) from Votacao v where v.id.id = :id and upper(v.voto) = upper(:voto)")
 	Integer contarVoto(Integer id, String voto);
 
+	@Query("Select count(v.voto) from Votacao v where v.id.id = :id")
+	Integer procuraVoto(Integer id);
 }

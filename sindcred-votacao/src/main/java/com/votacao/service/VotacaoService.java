@@ -96,5 +96,9 @@ public class VotacaoService {
 		return repository.contarVoto(id,voto);
 	}
 	
+	public Integer procuraVoto(Integer id) {
+		return repository.procuraVoto(id);
+	}
+	
 }
 
