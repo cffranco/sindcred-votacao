@@ -118,7 +118,7 @@ public class VotacaoServiceTest {
         pauta.setId(1);
         pauta.setPauta("Test Pauta");
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -1); // One minute ago
+        calendar.add(Calendar.MINUTE, -1); 
         pauta.setDataVotacao(calendar.getTime());
 
         assertThrows(ResourceNotFoundException.class, () -> votacaoService.computarVoto(voto, pauta));
@@ -136,7 +136,7 @@ public class VotacaoServiceTest {
         pauta.setId(1);
         pauta.setPauta("Test Pauta");
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1); // One minute in the future
+        calendar.add(Calendar.MINUTE, 1); 
         pauta.setDataVotacao(calendar.getTime());
 
         assertThrows(ResourceNotFoundException.class, () -> votacaoService.computarVoto(voto, pauta));
@@ -146,7 +146,7 @@ public class VotacaoServiceTest {
     void testVerificarVotacaoEncerrada() {
         Pauta pauta = new Pauta();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -1); // One minute ago
+        calendar.add(Calendar.MINUTE, -1); 
         pauta.setDataVotacao(calendar.getTime());
 
         String result = votacaoService.verificarVotacao(pauta);
@@ -158,7 +158,7 @@ public class VotacaoServiceTest {
     void testVerificarVotacaoNaoIniciada() {
         Pauta pauta = new Pauta();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1); // One minute in the future
+        calendar.add(Calendar.MINUTE, 1); 
         pauta.setDataVotacao(calendar.getTime());
 
         String result = votacaoService.verificarVotacao(pauta);
